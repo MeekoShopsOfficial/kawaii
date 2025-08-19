@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 Kawaii Shops 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #9B7EBD;
+            --primary-light: #E8DFFC;
+            --primary-dark: #7A5F94;
+            --secondary: #F5F1E8;
+            --accent: #E3C5D8;
+            --surface: #FFFFFF;
+            --surface-variant: #F8F4FF;
+            --text-primary: #2D1B37;
+            --text-secondary: #6B5B73;
+            --text-muted: #9B8AA3;
+            --border: rgba(155, 126, 189, 0.15);
+            --shadow-sm: 0 2px 8px rgba(45, 27, 55, 0.08);
+            --shadow-md: 0 4px 20px rgba(45, 27, 55, 0.12);
+            --shadow-lg: 0 8px 32px rgba(45, 27, 55, 0.16);
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        body {
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #FEFCF8 0%, #F8F4FF 50%, #F0ECFF 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Lexend', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: var(--text-secondary);
+            font-family: 'Lexend', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0.25rem;
+        }
+
+        .tag.price {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tag.deal {
+            background: linear-gradient(135deg, var(--success), #16A34A);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tag.bestseller {
+            background: linear-gradient(135deg, var(--warning), #D97706);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tag.new {
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tag.limited {
+            background: linear-gradient(135deg, var(--error), #DC2626);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .price-display {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 1.5rem;
+        }
+
+        /* Bundle Cards */
+        .bundle-card {
+            background: linear-gradient(135deg, var(--surface), var(--surface-variant));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bundle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .bundle-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .bundle-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .bundle-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1.5rem 0;
+        }
+
+        .bundle-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .bundle-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--surface), var(--primary-light));
+            color: var(--text-primary);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .contact-email {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        /* FAQ Items */
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            background: var(--surface-variant);
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: 'Lexend', sans-serif;
+            font-size: 1rem;
+        }
+
+        .faq-question:hover {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .faq-answer.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 200px;
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+        }
+
+        /* Credits Section */
+        .credits {
+            text-align: center;
+            padding: 3rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .credits h2 {
+            color: var(--text-primary);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .credit-person {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--surface-variant);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .credit-person:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .credit-person h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        /* Special Offer Box */
+        .offer-box {
+            text-align: center;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, var(--surface), var(--accent));
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .offer-box h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .offer-box .highlight {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .offer-box .subtitle {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 2rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.75rem;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.85rem;
+                flex: 0 1 auto;
+                min-width: fit-content;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card h3 {
+                font-size: 1.3rem;
+            }
+
+            .card p {
+                font-size: 0.95rem;
+            }
+
+            .price-display {
+                font-size: 1.6rem;
+            }
+
+            .bundle-card {
+                padding: 2rem 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .bundle-title {
+                font-size: 1.6rem;
+            }
+
+            .bundle-price {
+                font-size: 2rem;
+            }
+
+            .bundle-description {
+                font-size: 1rem;
+            }
+
+            .contact-section {
+                padding: 2rem 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .contact-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .contact-email {
+                font-size: 1.1rem;
+            }
+
+            .banner {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+                font-size: 0.95rem;
+            }
+
+            .credits {
+                padding: 2rem 1.5rem;
+            }
+
+            .credits h2 {
+                font-size: 1.8rem;
+            }
+
+            .credit-person {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .faq-item {
+                margin-bottom: 1rem;
+            }
+
+            .faq-question {
+                padding: 1.25rem;
+                font-size: 0.95rem;
+            }
+
+            .faq-answer {
+                padding: 1.25rem;
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: 3rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .offer-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .offer-box h3 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+
+            .bundle-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .contact-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .credits {
+                padding: 1.5rem 1rem;
+            }
+
+            .banner {
+                padding: 1.25rem;
+                font-size: 0.9rem;
+            }
+
+            .offer-box {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>🎀 Kawaii Shops 🎀</h1>
+        <p>Your premium destination for cute collectibles and adorable accessories</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('home', this)">🏠 Home</button>
+            <button class="nav-btn" onclick="showSection('products', this)">🛍️ Products</button>
+            <button class="nav-btn" onclick="showSection('bundles', this)">📦 Bundles</button>
+            <button class="nav-btn" onclick="showSection('birthday', this)">🎂 Birthday Cards</button>
+            <button class="nav-btn" onclick="showSection('faq', this)">❓ FAQ</button>
+            <button class="nav-btn" onclick="showSection('credits', this)">💖 Credits</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="banner">
+                ✨ Welcome to our newly redesigned store! We've curated an amazing selection of cute items with daily updates. Check back often for the latest additions! 🌟
+            </div>
+            
+            <div class="contact-section">
+                <h2>Need Assistance with Orders or Custom Requests?</h2>
+                <p style="margin: 1rem 0;">Contact <span class="contact-email">Isla</span> anytime for support! 💌</p>
+                <p>We're here to help with questions, issues, or custom creations!</p>
+            </div>
+
+            <div class="offer-box">
+                <h3>🎁 Surprise Bonus Program</h3>
+                <p class="highlight">50% chance of receiving complimentary items with every order!</p>
+                <p class="subtitle">We love delighting our customers with unexpected treats! 💖</p>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="section">
+            <h2 style="text-align: center; color: var(--text-primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Our Collection 🛍️</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-style: italic; color: var(--text-secondary); font-size: 1.1rem;">
+                Carefully curated items with new arrivals added daily ✨
+            </p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎒 Mystery Blind Bags</h3>
+                    <p>Surprise collections containing adorable items waiting to be discovered! Each bag is a delightful mystery.</p>
+                    <div class="card-tags">
+                        <span class="tag price">$1.25</span>
+                        <span class="tag bestseller">Bestseller</span>
+                    </div>
+                    <div class="price-display">$1.25</div>
+                </div>
+                
+                <div class="card">
+                    <h3>✨ Premium Stickers</h3>
+                    <p>High-quality decorative stickers perfect for personalizing your belongings with cute designs.</p>
+                    <div class="card-tags">
+                        <span class="tag price">$0.50</span>
+                        <span class="tag deal">Great Value</span>
+                    </div>
+                    <div class="price-display">$0.50 each</div>
+                </div>
+                
+                <div class="card">
+                    <h3>🧸 Soft Squishies</h3>
+                    <p>Ultra-soft, squeezable stress relief companions made from premium materials.</p>
+                    <div class="card-tags">
+                        <span class="tag price">$3.50</span>
+                        <span class="tag new">New</span>
+                    </div>
+                    <div class="price-display">$3.50</div>
+                </div>
+                
+                <div class="card">
+                    <h3>🃏 Collectible Trading Cards</h3>
+                    <p>Premium collectible cards featuring exclusive artwork and designs.</p>
+                    <div class="card-tags">
+                        <span class="tag price">$0.25</span>
+                        <span class="tag deal">Lowest Price</span>
+                    </div>
+                    <div class="price-display">$0.25 each</div>
+                </div>
+                
+                <div class="card">
+                    <h3>💖 Designer Bracelets</h3>
+                    <p>Fashionable accessories to complement your style with adorable charm details.</p>
+                    <div class="card-tags">
+                        <span class="tag price">$2.00</span>
+                        <span class="tag limited">Limited</span>
+                    </div>
+                    <div class="price-display">$2.00</div>
+                </div>
+                
+                <div class="card">
+                    <h3>🗝️ Decorative Keychains</h3>
+                    <p>Stylish keychains perfect for bags, keys, or as collectible display pieces.</p>
+                    <div class="card-tags">
+                        <span class="tag price">$1.50</span>
+                        <span class="tag bestseller">Popular</span>
+                    </div>
+                    <div class="price-display">$1.50</div>
+                </div>
+                
+                <div class="card">
+                    <h3>📦 Sticker Value Packs</h3>
+                    <p>Bulk sticker collections offering exceptional value for enthusiasts and collectors.</p>
+                    <div class="card-tags">
+                        <span class="tag deal">Best Deal</span>
+                        <span class="tag price">From $2.50</span>
+                    </div>
+                    <div class="price-display">
+                        5 pack: $2.50<br>
+                        10 pack: $4.15<br>
+                        15 pack: $5.30
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bundles Section -->
+        <section id="bundles" class="section">
+            <h2 style="text-align: center; color: var(--text-primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Value Bundles 🎁</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary); font-size: 1.1rem;">
+                Curated collections that save you money while giving you more variety
+            </p>
+            
+            <div class="bundle-card">
+                <div class="bundle-title">Starter Bundle</div>
+                <div class="bundle-tags">
+                    <span class="tag deal">Save 20%</span>
+                    <span class="tag price">$7.00</span>
+                </div>
+                <div class="bundle-price">$7.00</div>
+                <div class="bundle-description">Perfect introduction package including stickers, a small squishy, and surprise bonus items! 🎁</div>
+            </div>
+            
+            <div class="bundle-card">
+                <div class="bundle-title">Explorer Bundle</div>
+                <div class="bundle-tags">
+                    <span class="tag deal">Save 30%</span>
+                    <span class="tag bestseller">Most Popular</span>
+                    <span class="tag price">$10.00</span>
+                </div>
+                <div class="bundle-price">$10.00</div>
+                <div class="bundle-description">Expanded collection featuring stickers, squishies, keychain, and premium bonus items! 🌟</div>
+            </div>
+            
+            <div class="bundle-card">
+                <div class="bundle-title">Ultimate Collection</div>
+                <div class="bundle-tags">
+                    <span class="tag deal">Save 40%</span>
+                    <span class="tag limited">Premium</span>
+                    <span class="tag price">$15.00</span>
+                </div>
+                <div class="bundle-price">$15.00</div>
+                <div class="bundle-description">Complete experience with everything from our collection - ideal for serious collectors and gift-giving! 💖</div>
+            </div>
+        </section>
+
+        <!-- Birthday Section -->
+        <section id="birthday" class="section">
+            <h2 style="text-align: center; color: var(--text-primary); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Birthday Cards Collection 🎂</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary); font-size: 1.1rem;">
+                Celebrate special moments with our premium greeting card collection ✨
+            </p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎂 Classic Birthday Cards</h3>
+                    <p>Beautifully designed birthday cards with premium finishes, perfect for making someone's day extra special! 🎉</p>
+                    <div class="card-tags">
+                        <span class="tag price">$2.50</span>
+                        <span class="tag bestseller">Popular</span>
+                    </div>
+                    <div class="price-display">$2.50 each</div>
+                </div>
+                
+                <div class="card">
+                    <h3>🎁 Custom Personalized Cards</h3>
+                    <p>Bespoke birthday cards with custom names and personalized messages, crafted with attention to detail! 💖</p>
+                    <div class="card-tags">
+                        <span class="tag price">$2.50</span>
+                        <span class="tag limited">Custom</span>
+                    </div>
+                    <div class="price-display">$2.50 each</div>
+                </div>
+                
+                <div class="card">
+                    <h3>🌈 Rainbow Fantasy Cards</h3>
+                    <p>Vibrant birthday cards featuring rainbow themes, unicorns, and magical elements to brighten any celebration! 🦄</p>
+                    <div class="card-tags">
+                        <span class="tag price">$2.50</span>
+                        <span class="tag new">New Design</span>
+                    </div>
+                    <div class="price-display">$2.50 each</div>
+                </div>
+                
+                <div class="card">
+                    <h3>🧸 Animal Friends Cards</h3>
+                    <p>Adorable animal-themed birthday cards featuring pandas, cats, bears, and other beloved creatures! 🐱</p>
+                    <div class="card-tags">
+                        <span class="tag price">$2.50</span>
+                        <span class="tag bestseller">Fan Favorite</span>
+                    </div>
+                    <div class="price-display">$2.50 each</div>
+                </div>
+                
+                <div class="card">
+                    <h3>✨ Premium Foil Cards</h3>
+                    <p>Luxury birthday cards with metallic foil accents and premium cardstock for those extra special occasions!</p>
+                    <div class="card-tags">
+                        <span class="tag price">$3.00</span>
+                        <span class="tag limited">Premium</span>
+                    </div>
+                    <div class="price-display">$3.00 each</div>
+                </div>
+                
+                <div class="card">
+                    <h3>🎈 Pop-Up Interactive Cards</h3>
+                    <p>Surprise cards with delightful pop-up elements that create magical moments when opened! ✨</p>
+                    <div class="card-tags">
+                        <span class="tag price">$4.00</span>
+                        <span class="tag new">Interactive</span>
+                    </div>
+                    <div class="price-display">$4.00 each</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section">
+            <h2 style="text-align: center; color: var(--text-primary); font-size: 2.5rem; margin-bottom: 3rem; font-weight: 700;">Frequently Asked Questions ❓</h2>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    How do I place an order?
+                </button>
+                <div class="faq-answer">
+                    Contact Isla directly through our messaging system with your desired items. We'll provide personalized assistance and handle everything for you! 💌
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    What payment methods do you accept?
+                </button>
+                <div class="faq-answer">
+                    We accept various secure payment methods including PayPal, Venmo, and other digital payment platforms. Payment details will be provided when you place your order.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    How long does shipping take?
+                </button>
+                <div class="faq-answer">
+                    Standard shipping typically takes 3-7 business days within the continental US. We'll provide tracking information once your order ships! 📦
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    Can I request custom items?
+                </button>
+                <div class="faq-answer">
+                    Absolutely! We love creating custom pieces. Contact us with your ideas and we'll work with you to bring your vision to life! ✨
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    What is the Surprise Bonus Program?
+                </button>
+                <div class="faq-answer">
+                    With every order, there's a 50% chance you'll receive complimentary bonus items! It's our way of spreading joy and showing appreciation to our amazing customers! 🎁
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    Do you offer international shipping?
+                </button>
+                <div class="faq-answer">
+                    Currently, we primarily ship within the United States. For international orders, please contact us directly to discuss shipping options and costs.
+                </div>
+            </div>
+        </section>
+
+        <!-- Credits Section -->
+        <section id="credits" class="section">
+            <div class="credits">
+                <h2>Credits & Appreciation 💖</h2>
+                
+                <div class="credit-person">
+                    <h3>Store Owner & Curator</h3>
+                    <p style="color: var(--text-secondary);">Isla - The heart behind Kawaii Shops, carefully selecting each adorable item and ensuring every customer experience is magical! ✨</p>
+                </div>
+                
+                <div class="credit-person">
+                    <h3>Website Development</h3>
+                    <p style="color: var(--text-secondary);">Claude (Anthropic) - Bringing the vision to life with beautiful, functional web design that showcases our cute collection perfectly! 🌟</p>
+                </div>
+                
+                <div class="credit-person">
+                    <h3>Special Thanks</h3>
+                    <p style="color: var(--text-secondary);">To all our wonderful customers who make this kawaii community so special! Your support and enthusiasm inspire us every day! 💕</p>
+                </div>
+                
+                <div style="margin-top: 3rem; padding: 2rem; background: var(--primary-light); border-radius: 16px;">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Our Mission 🎯</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
+                        At Kawaii Shops, we believe in spreading joy through adorable collectibles and creating magical moments for our customers. Every item is chosen with love, and every order is handled with care! 💖
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>🎀 Kawaii Shops - Where cute dreams come true! 🎀</p>
+        <p style="margin-top: 0.5rem;">© 2024 Kawaii Shops. Made with 💖 for kawaii lovers everywhere!</p>
+    </div>
+
+    <script>
+        function showSection(sectionId, buttonElement) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show the selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Add active class to clicked button
+            buttonElement.classList.add('active');
+        }
+        
+        function toggleFAQ(questionElement) {
+            const answer = questionElement.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all FAQ answers
+            const allAnswers = document.querySelectorAll('.faq-answer');
+            allAnswers.forEach(ans => {
+                ans.classList.remove('active');
+            });
+            
+            // If this answer wasn't active, open it
+            if (!isActive) {
+                answer.classList.add('active');
+            }
+        }
+        
+        // Close FAQ when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.faq-item')) {
+                const allAnswers = document.querySelectorAll('.faq-answer');
+                allAnswers.forEach(ans => {
+                    ans.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
